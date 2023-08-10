@@ -164,9 +164,9 @@
 					</section>
 				</aside>
 			</main>
-			{% block javascript %}
-			<script src="{{ url_for('static', filename='embedded.js') }}"></script>
-			{% endblock %}
 		</div>
 	</foreignObject>
 </svg>
+{% block javascript %}
+<script src="{{ url_for('static', filename='embedded.js') }}"></script>
+{% endblock %}
