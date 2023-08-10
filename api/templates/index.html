@@ -164,11 +164,9 @@
 							<div class="bar-container">{{bars|safe}}</div>
 						</section>
 					</aside>
+					<script src="{{ url_for('static', filename='embedded.js') }}"></script>
 				</main>
 			</div>
 		</foreignObject>
 	</svg>
-	{% block javascript %}
-	<script src="{{ url_for('static', filename='embedded.js') }}"></script>
-	{% endblock %}
 </body>
