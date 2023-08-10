@@ -158,16 +158,16 @@
 						<img class="scan-code" src="data:image/png;base64, {{scan_code}}" alt="Scan Code" />
 						{% endif %}
 						<aside>
-							<img class="cover" src="data:image/png;base64, {{image}}" alt="Cover Image" />
+							<img class="cover" src="data:image/png;base64, {{image}}" id="imageId" alt="Cover Image" />
 							<section>
 								<div class="info">
 									<div class="top">
 										{% if not scan_code %}
 										<img class="logo" src="data:image/png;base64, {{logo}}" alt="Spotify Logo" />
 										{% endif %}
-										<h1>{{song}}</h1>
+										<h1 id="song">{{song}}</h1>
 									</div>
-									<p>{{artist}}</p>
+									<p id="artist">{{artist}}</p>
 								</div>
 								<div class="bar-container">{{bars|safe}}</div>
 							</section>
@@ -178,11 +178,19 @@
 		</svg>
 		<script>
 			function updateEmbed() {
-				fetch("getcurrentrunning")
+				fetch("api?info=true")
 					.then((response) => response.json())
 					.then((data) => {
+						console.log("Data received:", data);
 						// Create the embed content using the data from the API
-						console.log(data);
+						let songName = document.getElementById("song");
+						songName.innerHTML = data.song;
+
+						let artistName = document.getElementById("artist");
+						artistName.innerHTML = data.artist;
+
+						let image = document.getElementById("imageId");
+						image.src = `data:image/png;base64, ${data.image}`;
 					})
 					.catch((error) => {
 						console.error("Error fetching data:", error);

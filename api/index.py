@@ -149,8 +149,6 @@ def getinfos(path):
         "artist": item["artists"][0]["name"].replace("&", "&amp;"),
         "song": item["name"].replace("&", "&amp;"),
         "image": image,
-        "data": data,
-        "item": item
     })
 
 
