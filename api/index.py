@@ -151,6 +151,7 @@ def getinfos():
         "image": image
     }, content_type="application/json")
 
+@app.route("/:path")
 @app.route("/api", defaults={"path": ""})
 def catch_all(path):
     print(path)
