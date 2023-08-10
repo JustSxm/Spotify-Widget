@@ -3,7 +3,7 @@ from base64 import b64encode
 from dotenv import find_dotenv, load_dotenv
 from flask import Flask, Response, render_template, request
 from os import getenv
-import json
+from flask import jsonify
 from random import randint
 
 # Load environment variables
@@ -132,7 +132,6 @@ def make_svg(spin, scan, theme, rainbow):
 app = Flask(__name__)
 
 def getinfos(path):
-    print("getinfos")
     data = spotify_request("me/player/currently-playing")
     if data:
         item = data["item"]
@@ -146,11 +145,13 @@ def getinfos(path):
         image = load_image_base64(item["album"]["images"][1]["url"])
     
     #Return ok with json data
-    return Response({
+    return jsonify({
         "artist": item["artists"][0]["name"].replace("&", "&amp;"),
         "song": item["name"].replace("&", "&amp;"),
-        "image": image
-    }, content_type="application/json")
+        "image": image,
+        "data": data,
+        "item": item
+    })
 
 
 @app.route("/api", defaults={"path": ""})
