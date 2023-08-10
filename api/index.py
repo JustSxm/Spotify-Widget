@@ -160,7 +160,6 @@ def catch_all(path):
             request.args.get("theme"),
             request.args.get("rainbow"),
         ),
-        mimetype="image/svg+xml",
     )
     resp.headers["Cache-Control"] = "s-maxage=1"
     return resp
