@@ -151,7 +151,7 @@ def getinfos():
         "image": image
     }
 
-@app.route("/", defaults={"path": ""})
+@app.route("/api", defaults={"path": ""})
 def catch_all(path):
     resp = Response(
         make_svg(
