@@ -156,6 +156,8 @@ def getinfos(path):
 
 @app.route("/api", defaults={"path": ""})
 def catch_all(path):
+    info = request.args.get("info")
+    print(info)
 
     resp = Response(
         make_svg(
