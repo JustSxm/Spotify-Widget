@@ -131,8 +131,8 @@ def make_svg(spin, scan, theme, rainbow):
 
 app = Flask(__name__)
 
-@app.route("/info")
-def getinfos():
+@app.route("/api/info", defaults={"path": ""})
+def getinfos(path):
     print("getinfos")
     data = spotify_request("me/player/currently-playing")
     if data:
