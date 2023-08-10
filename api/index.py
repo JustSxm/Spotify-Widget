@@ -3,6 +3,7 @@ from base64 import b64encode
 from dotenv import find_dotenv, load_dotenv
 from flask import Flask, Response, render_template, request
 from os import getenv
+import json
 from random import randint
 
 # Load environment variables
@@ -145,11 +146,11 @@ def getinfos():
         image = load_image_base64(item["album"]["images"][1]["url"])
     
     #Return ok with json data
-    return {
+    return Response({
         "artist": item["artists"][0]["name"].replace("&", "&amp;"),
         "song": item["name"].replace("&", "&amp;"),
         "image": image
-    }
+    }, content_type="application/json")
 
 @app.route("/api", defaults={"path": ""})
 def catch_all(path):
