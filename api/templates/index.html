@@ -181,7 +181,6 @@
 				fetch("api?info=true")
 					.then((response) => response.json())
 					.then((data) => {
-						console.log("Data received:", data);
 						// Create the embed content using the data from the API
 						let songName = document.getElementById("song");
 						songName.innerHTML = data.song;
