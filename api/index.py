@@ -128,12 +128,30 @@ def make_svg(spin, scan, theme, rainbow):
         },
     )
 
-
 app = Flask(__name__)
 
+@app.route("/getinfos")
+def getinfos():
+    data = spotify_request("me/player/currently-playing")
+    if data:
+        item = data["item"]
+    else:
+        item = spotify_request(
+            "me/player/recently-played?limit=1")["items"][0]["track"]
+
+    if item["album"]["images"] == []:
+        image = B64_PLACEHOLDER_IMAGE
+    else:
+        image = load_image_base64(item["album"]["images"][1]["url"])
+    
+    #Return ok with json data
+    return {
+        "artist": item["artists"][0]["name"].replace("&", "&amp;"),
+        "song": item["name"].replace("&", "&amp;"),
+        "image": image
+    }
 
 @app.route("/", defaults={"path": ""})
-@app.route("/<path:path>")
 def catch_all(path):
     resp = Response(
         make_svg(
