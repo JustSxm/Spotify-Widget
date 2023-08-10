@@ -1,11 +1,4 @@
 function updateEmbed() {
-	console.log("Updating embed...");
-}
-
-// Update every 10 seconds
-setInterval(updateEmbed, 1); // 10,000 milliseconds = 10 seconds
-
-/*
 	fetch("getcurrentrunning")
 		.then((response) => response.json())
 		.then((data) => {
@@ -15,4 +8,7 @@ setInterval(updateEmbed, 1); // 10,000 milliseconds = 10 seconds
 		.catch((error) => {
 			console.error("Error fetching data:", error);
 		});
-	*/
+}
+
+// Update every 10 seconds
+setInterval(updateEmbed, 10000); // 10,000 milliseconds = 10 seconds
